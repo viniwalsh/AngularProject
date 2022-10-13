@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ProductService} from "../product.service";
 import {Router} from "@angular/router";
-import {Product} from "../product.model";
+import { Stiker } from 'src/app/models/stiker.model';
+import { StikerService } from 'src/app/Services/product.service';
 
 @Component({
   selector: 'app-product-create',
@@ -10,12 +10,14 @@ import {Product} from "../product.model";
 })
 export class ProductCreateComponent implements OnInit {
 
-  product: Product = {
+  stiker: Stiker = {
+    id: '',
     name: '',
-    price: null
+    country: '',
+    category: ''
   };
 
-  constructor(private productService: ProductService,
+  constructor(private stikerService: StikerService,
               private router: Router) { }
 
   ngOnInit(): void {
@@ -23,8 +25,8 @@ export class ProductCreateComponent implements OnInit {
   }
 
   createProduct(): void {
-    this.productService.create(this.product).subscribe(() => {
-      this.productService.showMenssage('Operação realizada com sucesso')
+    this.stikerService.create(this.stiker).subscribe(() => {
+      this.stikerService.showMenssage('Operação realizada com sucesso')
       this.router.navigate(['/products'])
     })
 

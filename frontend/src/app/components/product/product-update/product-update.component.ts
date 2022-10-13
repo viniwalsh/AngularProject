@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ProductService} from "../product.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Product} from "../product.model";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Stiker } from 'src/app/models/stiker.model';
+import { StikerService } from "../../../Services/product.service";
+
 
 @Component({
   selector: 'app-product-update',
@@ -10,22 +11,22 @@ import {Product} from "../product.model";
 })
 export class ProductUpdateComponent implements OnInit {
 
-  product: Product;
+  stiker: Stiker;
 
-  constructor(private productService: ProductService,
+  constructor(private stikerService: StikerService,
               private router: Router,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.productService.readById(id).subscribe(product => {
-      this.product = product;
+    this.stikerService.readById(id).subscribe(stiker => {
+      this.stiker = stiker;
     })
   }
 
   updateProduct(): void {
-    this.productService.update(this.product).subscribe(() => {
-    this.productService.showMenssage('Produto atualizado com sucesso');
+    this.stikerService.update(this.stiker).subscribe(() => {
+    this.stikerService.showMenssage('Stiker atualizado com sucesso');
     this.router.navigate(['/products']);
    })
   }

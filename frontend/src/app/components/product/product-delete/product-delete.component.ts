@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Product} from "../product.model";
-import {ProductService} from "../product.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import { Stiker } from 'src/app/models/stiker.model';
+import { StikerService } from 'src/app/Services/product.service';
 
 @Component({
   selector: 'app-product-delete',
@@ -9,23 +9,23 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./product-delete.component.scss']
 })
 export class ProductDeleteComponent implements OnInit {
-  product: Product;
+  stiker: Stiker;
 
-  constructor(private productService: ProductService,
+  constructor(private stikerService: StikerService,
               private router: Router,
               private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.productService.readById(id).subscribe(product => {
-      this.product = product;
+    this.stikerService.readById(id).subscribe(product => {
+      this.stiker = product;
     })
   }
 
   deleteProduct(): void {
-    this.productService.deletProduct(this.product.id).subscribe(() => {
-      this.productService.showMenssage('Produto excluido com sucesso');
+    this.stikerService.deletProduct(this.stiker.id).subscribe(() => {
+      this.stikerService.showMenssage('Produto excluido com sucesso');
       this.router.navigate(['/products']);
     })
   }

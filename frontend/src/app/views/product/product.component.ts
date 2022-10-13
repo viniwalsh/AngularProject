@@ -12,7 +12,7 @@ export class ProductComponent implements OnInit {
   constructor(private router: Router,
               private headerService: HeaderService) {
     headerService.headerData = {
-      title: 'Cadastro de Produtos',
+      title: 'Registration of Stikes',
       icon: 'storefront',
       routerUrl: '/products'
     }

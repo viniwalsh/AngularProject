@@ -1,9 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Product} from "../product.model";
-import {ProductService} from "../product.service";
-import {MatPaginator} from "@angular/material/paginator";
-import {MatSort} from "@angular/material/sort";
-import {MatTable} from "@angular/material/table";
+import { Component, OnInit } from '@angular/core';
+import { Stiker } from 'src/app/models/stiker.model';
+import { StikerService } from "../../../Services/product.service";
 
 @Component({
   selector: 'app-product-read',
@@ -11,10 +8,10 @@ import {MatTable} from "@angular/material/table";
   styleUrls: ['./product-read.component.scss']
 })
 export class ProductReadComponent implements OnInit {
-  products: Product[];
-  displayedColumns = ['id', 'name', 'price', 'action'];
+  stikers: Stiker[];
+  displayedColumns = ['id', 'name', 'country', 'category','action'];
 
-  constructor(private productService: ProductService) {
+  constructor(private stickerService: StikerService) {
   }
 
   ngOnInit(): void {
@@ -22,8 +19,8 @@ export class ProductReadComponent implements OnInit {
   }
 
   listProducts() {
-    this.productService.read().subscribe(products => {
-      this.products = products;
+    this.stickerService.read().subscribe(stikers => {
+      this.stikers = stikers;
     })
   }
 }
